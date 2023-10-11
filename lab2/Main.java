@@ -14,7 +14,7 @@ public class Main {
         System.out.println(motorcycle.getMotor() + "\n");
 
 
-        car.setAge(2);
+        car.setAge(3);
         truck.setWheel(10);
         motorcycle.setMotor("electric");
 
