@@ -1,59 +1,70 @@
 package lab3;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class HashTable<K, V> {
-    private ArrayList<LinkedList<Entry<K, V>>> table;
-    private int size;
+    private static int size = 0;
+    private LinkedList<Entry<K, V>>[] table;
 
-    public HashTable(int InitCapacity) {
-        table = new ArrayList<>(InitCapacity);
-        for (int i = 0; i < InitCapacity; i++) {
-            table.add(null);
+    public HashTable() {
+        table = new LinkedList[10];
+        for (int i = 0; i < table.length; i++) {
+            table[i] = new LinkedList<>();
         }
-        size = 0;
     }
-
     public void put(K key, V value) {
-        int index = hash(key);
-        LinkedList<Entry<K, V>> list = table.get(index);
-        if (list == null) {
-            list = new LinkedList<>();
-            table.set(index, list);
+        int index = getIndex(key);
+        if (table[index] == null){
+            table[index] = new LinkedList<Entry<K, V>>();
         }
-        for (Entry<K, V> entry : list) {
+        for (Entry<K, V> entry : table[index]) {
             if (entry.getKey().equals(key)) {
                 entry.setValue(value);
                 return;
             }
         }
-        list.add(new Entry<>(key, value));
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] == null) {
+                table[i] = new LinkedList<Entry<K, V>>();
+                table[i].add(new Entry<>(key, value));
+                size++;
+                return;
+            }
+        }
+        table[index].add(new Entry<>(key, value));
         size++;
     }
 
     public V get(K key) {
-        int index = hash(key);
-        LinkedList<Entry<K, V>> list = table.get(index);
-        if (list != null) {
-            for (Entry<K, V> entry : list) {
-                if (entry.getKey().equals(key)) {
-                    return entry.getValue();
-                }
+        int index = getIndex(key);
+        if (table[index] == null){
+            table[index] = new LinkedList<Entry<K, V>>();
+        }
+        for (Entry<K, V> entry : table[index]) {
+            if (entry.getKey().equals(key)) {
+                return entry.getValue();
             }
         }
         return null;
     }
 
     public void remove(K key) {
-        int index = hash(key);
-        LinkedList<Entry<K, V>> list = table.get(index);
-        if (list != null) {
-            for (Entry<K, V> entry : list) {
-                if (entry.getKey().equals(key)) {
-                    list.remove(entry);
-                    size--;
-                    return;
-                }
+        int index = getIndex(key);
+        if (table[index] == null){
+            table[index] = new LinkedList<Entry<K, V>>();
+        }
+        for (Entry<K, V> entry : table[index]) {
+            if (entry.getKey().equals(key)) {
+                table[index].remove(entry);
+                size--;
+                return;
+            }
+        }
+    }
+
+    public void printTable() {
+        for (int i = 0; i < table.length; i++) {
+            for (Entry<K, V> entry : table[i]) {
+                System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
             }
         }
     }
@@ -66,8 +77,8 @@ public class HashTable<K, V> {
         return size == 0;
     }
 
-    private int hash(K key) {
-        return Math.abs(key.hashCode()) % table.size();
+    private int getIndex(K key) {
+        return Math.abs(key.hashCode() % table.length);
     }
 
     private static class Entry<K, V> {
@@ -90,20 +101,5 @@ public class HashTable<K, V> {
         public void setValue(V value) {
             this.value = value;
         }
-    }
-
-    public static void main(String[] args) {
-        HashTable<String, Integer> table = new HashTable<>(10);
-
-        table.put("apple", 1);
-        table.put("banana", 2);
-        table.put("cherry", 3);
-
-        System.out.println("Значение ключа: " + table.get("apple"));
-
-        table.remove("apple");
-
-        System.out.println("Количество элементов таблицы: " + table.size());
-        System.out.println("Пустая таблица: " + table.isEmpty());
     }
 }
