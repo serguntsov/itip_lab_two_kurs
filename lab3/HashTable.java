@@ -22,14 +22,6 @@ public class HashTable<K, V> {
                 return;
             }
         }
-        for (int i = 0; i < table.length; i++) {
-            if (table[i] == null) {
-                table[i] = new LinkedList<Entry<K, V>>();
-                table[i].add(new Entry<>(key, value));
-                size++;
-                return;
-            }
-        }
         table[index].add(new Entry<>(key, value));
         size++;
     }

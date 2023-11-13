@@ -11,13 +11,16 @@ public class Main {
         hashTable.put(5969702889L, book2);
         hashTable.put(9785907097261L, book3);
 
-        System.out.println(hashTable.get(9785928733247L));
 
-        hashTable.remove(9785928733247L);
+        System.out.println(hashTable.get(9785928733247L));
         System.out.println(hashTable.get(9785928733247L));
 
         System.out.println("Количество элементов таблицы: " + hashTable.size());
         System.out.println("Пустая таблица: " + hashTable.isEmpty());
         hashTable.printTable();
+        System.out.println("9785928733247L".hashCode());
+        System.out.println("5969702889L".hashCode());
+        System.out.println("9785907097261L".hashCode());
+        System.out.println("978590709726L".hashCode());
     }
 }
