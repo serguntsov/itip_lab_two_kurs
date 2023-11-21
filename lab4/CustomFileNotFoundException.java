@@ -2,19 +2,22 @@ package lab4;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.logging.*;
 
 public class CustomFileNotFoundException {
+    private static Logger log = Logger.getLogger(CustomFileNotFoundException.class.getName());
     public static void main(String[] args) {
         String line = "";
-        File file = new File("/Users/serguntsov/desktop/java/lab/src/lab4/parseint.txt");
-        File filenew = new File("/Users/serguntsov/desktop/java/lab/src/lab4/log.txt");
+        File file = new File("C:/Users/User/Desktop/НУЖНЫЕ ФАЙЛЫ/java_labs/itip_lab_two_kurs/lab4/parseint1.txt");
+        File filenew = new File("C:/Users/User/Desktop/НУЖНЫЕ ФАЙЛЫ/java_labs/itip_lab_two_kurs/lab4/log.txt");
         try{
             filenew.createNewFile();
-            FileWriter writer = new FileWriter("/Users/serguntsov/desktop/java/lab/src/lab4/paste.txt");
+            FileHandler fileHandler = new FileHandler("C:/Users/User/Desktop/НУЖНЫЕ ФАЙЛЫ/java_labs/itip_lab_two_kurs/lab4/log.txt");
+            log.setLevel(Level.INFO);
+            log.addHandler(fileHandler);
             Scanner scan = new Scanner(file);
             line = scan.nextLine().replaceAll("\\pP", "");
             scan.close();
@@ -26,12 +29,11 @@ public class CustomFileNotFoundException {
             }
             System.out.println(Arrays.toString(num));
         } catch (FileNotFoundException e){
-            writer.write(line);
-            System.out.println("File Not Founded");
+            log.log(Level.SEVERE, "File Not Found", e);
         } catch (java.lang.NumberFormatException e){
-            System.out.println("Number Format Error: " + Arrays.toString(line.split(" ")));
+            log.log(Level.SEVERE, "Number Format Error: " + Arrays.toString(line.split(" ")), e);
         } catch (IOException e) {
-            System.out.println("Write error");
+            log.log(Level.SEVERE, "Write error", e);
         }
     }
 }
