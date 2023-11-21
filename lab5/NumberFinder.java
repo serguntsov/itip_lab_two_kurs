@@ -10,7 +10,7 @@ public class NumberFinder{
         boolean finder = false;
         while (matcher.find()) {
             System.out.println(matcher.group());
-            finder = true; // Set the flag to true if a match is found
+            finder = true;
         }
         if (!finder) {
             System.out.println("Number not found");
