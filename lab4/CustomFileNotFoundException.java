@@ -11,12 +11,11 @@ public class CustomFileNotFoundException {
     private static Logger log = Logger.getLogger(CustomFileNotFoundException.class.getName());
     public static void main(String[] args) {
         String line = "";
-        File file = new File("/Users/serguntsov/desktop/java/lab/src/lab4/parseint.txt");
-        File filenew = new File("/Users/serguntsov/desktop/java/lab/src/lab4/log.txt");
+        File file = new File("/Users/serguntsov/desktop/java/lab/src/lab4/parsein1.txt");
         try{
-            filenew.createNewFile();
-            FileHandler fileHandler = new FileHandler("/Users/serguntsov/desktop/java/lab/src/lab4/log.txt");
+            FileHandler fileHandler = new FileHandler("/Users/serguntsov/desktop/java/lab/src/lab4/log.txt", true);
             log.setLevel(Level.INFO);
+            fileHandler.setFormatter(new SimpleFormatter());
             log.addHandler(fileHandler);
             Scanner scan = new Scanner(file);
             line = scan.nextLine().replaceAll("\\pP", "");

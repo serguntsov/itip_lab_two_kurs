@@ -6,7 +6,7 @@ public class HashTable<K, V> {
     private LinkedList<Entry<K, V>>[] table;
 
     public HashTable() {
-        table = new LinkedList[10];
+        table = new LinkedList[2];
         for (int i = 0; i < table.length; i++) {
             table[i] = new LinkedList<>();
         }

@@ -9,7 +9,7 @@ public class WordFinder{
         "You can also Save & Share with the Community and view patterns you create or favorite in My Patterns."+
         "Explore results with the Tools below. Replace & List output custom results."+
         "Details lists capture groups. Explain describes your expression in plain English.";
-        Pattern pattern = Pattern.compile("\\ba[A-Za-z]*\\b");
+        Pattern pattern = Pattern.compile("(\\b[A-Za-z]*\\b)(\\(?!$))");
         Matcher matcher = pattern.matcher(text);
         boolean finder = false;
         while (matcher.find()){
