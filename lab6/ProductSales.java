@@ -24,9 +24,7 @@ public class ProductSales {
     }
 
     public void getAllSales(){
-        System.out.println("All sales:");
         System.out.println(sales.toString());
-        System.out.println("__________________________");
     }
 
     public int getCountSales(){

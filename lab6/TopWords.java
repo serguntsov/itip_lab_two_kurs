@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class TopWords {
      public static void main(String[] args){
-        File text = new File("C:/Users/User/Desktop/НУЖНЫЕ ФАЙЛЫ/java_labs/itip_lab_two_kurs/lab6/text.txt");
+        File text = new File("/Users/serguntsov/Desktop/java/lab/src/lab6/text.txt");
         Scanner scanner;
         try{
             scanner = new Scanner(text);

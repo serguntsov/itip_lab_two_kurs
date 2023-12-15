@@ -10,12 +10,12 @@ public class MainProduct {
         s.addSale("Cucumber",6);
 
         s.getAllSales();
-        System.out.println(s.getCountSales());
+        System.out.println(s.getCountSales() +"\n");
 
         s.addSale("Peach",8);
 
         s.getAllSales();
-        System.out.println(s.getCountSales());
+        System.out.println(s.getCountSales()+"\n");
         System.out.println(s.mostPopularProduct());
     }
 }
