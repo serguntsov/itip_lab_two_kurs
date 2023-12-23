@@ -5,15 +5,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MaxMultiThreading {
-
+    
+    private static int maxElement = 0;
     private static int[][] matrix = {
             {1, 2, 3, 4},
             {5, 6, 7, 8},
             {9, 10, 11, 12},
             {13, 14, 15, 16}
     };
-
-    private static int maxElement = Integer.MIN_VALUE;
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(matrix.length);
