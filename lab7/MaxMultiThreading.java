@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MaxMultiThreading {
-    
+
     private static int maxElement = 0;
     private static int[][] matrix = {
             {1, 2, 3, 4},
@@ -16,14 +16,10 @@ public class MaxMultiThreading {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(matrix.length);
-
-        // Запуск потоков для обработки строк матрицы
         for (int i = 0; i < matrix.length; i++) {
             final int row = i;
             executorService.submit(() -> processRow(row, matrix[0].length));
         }
-
-        // Остановка пула потоков после завершения всех задач
         executorService.shutdown();
         try {
             executorService.awaitTermination(1, TimeUnit.MINUTES);
@@ -36,7 +32,6 @@ public class MaxMultiThreading {
     private static void processRow(int row, int cols) {
         for (int j = 0; j < cols; j++) {
             int element = matrix[row][j];
-            // Синхронизация для обновления общей переменной maxElement
             synchronized (MaxMultiThreading.class) {
                 if (element > maxElement) {
                     maxElement = element;

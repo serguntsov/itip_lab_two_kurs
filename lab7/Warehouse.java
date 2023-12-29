@@ -6,8 +6,6 @@ public class Warehouse {
     private static final int max = 150;
     private static final int num_workers = 3;
     private static final int num_items = 10;
-    
-
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(num_workers);
         int[] items = new int[num_items];
@@ -23,7 +21,7 @@ public class Warehouse {
                 semaphore.acquire();
                 if (currentItem < num_items && currentWeight + items[currentItem] <= max) {
                     currentWeight += items[currentItem];
-                    System.out.println("Грузчик " + (currentItem % num_workers + 1) + " переносит товар " + currentItem + " весом " + items[currentItem] + " кг. Общий вес: " + currentWeight + " кг.");
+                    System.out.println("Грузчик " + (currentItem % num_workers + 1) + " переносит товар " + (currentItem+1) + " весом " + items[currentItem] + " кг. Общий вес: " + currentWeight + " кг.");
                     currentItem++;
                 } else {
                     allItemsProcessed = true;
@@ -34,7 +32,6 @@ public class Warehouse {
                 semaphore.release();
             }
         }
-
         System.out.println("Грузчики отправляются на другой склад для разгрузки товаров.");
     }
 }
